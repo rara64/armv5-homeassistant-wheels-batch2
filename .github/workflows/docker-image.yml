@@ -29,8 +29,8 @@ jobs:
         shell: bash
         run: |
           docker create --name wheels wheels
-          mkdir wheels2
-          docker cp wheels:./root/.cache/pip/wheels wheels2
+          mkdir wheels
+          docker cp wheels:./root/.cache/pip/wheels wheels
           
           export WHEELS_LIST=('NUMPY' 'CRYPTOGRAPHY')
           for wheel in "${WHEELS_LIST[@]}"; do export ${wheel}=$(find . -type f -name "*.whl" | grep -i "${wheel}"); done
