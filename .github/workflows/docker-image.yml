@@ -29,8 +29,8 @@ jobs:
         shell: bash
         run: |
           docker create --name wheels wheels
-          mkdir wheels
-          docker cp wheels:./root/.cache/pip/wheels wheels
+          mkdir wheels2
+          docker cp wheels:./root/.cache/pip/wheels wheels2
           
           export WHEELS_LIST=('NUMPY' 'CRYPTOGRAPHY')
           for wheel in "${WHEELS_LIST[@]}"; do export ${wheel}=$(find . -type f -name "*.whl" | grep -i "${wheel}"); done
@@ -38,7 +38,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v3
         with:
-          name: wheels
+          name: wheels2
           path: |
             ${{ env.NUMPY }}
             ${{ env.CRYPTOGRAPHY }}
