@@ -1,11 +1,11 @@
 # syntax = docker/dockerfile:experimental
-FROM --platform=linux/arm/v5 python:3.12-bullseye
+FROM --platform=linux/arm/v5 debian:sid
 ARG NUMPY_VER
 ARG CRYPTOGRAPHY_VER
 
-RUN echo "deb http://deb.debian.org/debian experimental main contrib non-free" >> /etc/apt/sources.list
-RUN apt update && DEBIAN_FRONTEND=noninteractive && apt install -y jq curl rustc build-essential cmake --no-install-recommends
+RUN apt update && DEBIAN_FRONTEND=noninteractive && apt install -y curl wget jq
 RUN wget $(curl --silent https://api.github.com/repos/rara64/armv5te-cargo/releases/latest | jq -r '.assets[0].browser_download_url')
+RUN apt install -y build-essential cmake rustc python3.12
 RUN dpkg -i *.deb
 
 RUN python -m venv /opt/venv
