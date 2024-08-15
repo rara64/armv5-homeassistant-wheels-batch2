@@ -14,4 +14,4 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN --security=insecure mkdir -p /root/.cargo/registry && chmod 777 /root/.cargo/registry && mount -t tmpfs none /root/.cargo/registry && pip install \
 numpy==$NUMPY_VER \
 cryptography==$CRYPTOGRAPHY_VER \
--C-allow-noblas=true --no-deps
+-Callow-noblas=true --no-deps
